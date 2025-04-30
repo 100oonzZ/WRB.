@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World round bead</title>
+  <style>
+    /* ─── 리셋 ───────────────────────────────────────────── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      font-family: 'Pretendard-Regular', sans-serif;
+      font-size: 16px;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      padding-top: 60px; /* 네비 높이만큼 띄우기 */
+      margin: 0;
+      background: #111;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      font-family: 'Pretendard-Regular', sans-serif;
+    }
+
+    /* ─── 네비게이션 바 ───────────────────────────────── */
+    .top-nav {
+      position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+   height: 100px;
+
+  background-color: transparent;
+ 
+  border-bottom: 0.3px solid #818181;
+
+  padding: 15px 0;
+  z-index: 1000;
+  text-align: center;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+    }
+    .top-nav ul {
+      margin: 0; padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    .top-nav li { margin: 0 15px; }
+    .top-nav a {
+      text-decoration: none;
+      color: #818181;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .top-nav a:hover {
+      background-color: black;
+      color: white;
+    }
+   
+
+    /* ─── 공통 .wrap ───────────────────────────────────────── */
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── 월라비 ───────────────────────────────────────────── */
+    header {
+      background: #000;
+    }
+    header .wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      height: 820px;
+    }
+    .logo-text {
+      font-family: 'Pretendard-Regular', sans-serif;
+      font-size: 100px;
+      color: #DED7C9;
+      white-space: nowrap;
+    }
+    .img-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .img-container {
+      position: relative;
+      width: 450px;
+      max-width: 100%;
+  flex-shrink: 0; /* 크기 줄어드는 것 방지 */
+    }
+
+    .img-container .blink {
+      position: absolute;
+      top: 0; left: 0;
+      animation: blink 2s infinite;
+    }
+
+    .img-container .img2 {
+      animation-delay: 1s;
+    }
+
+    @keyframes blink {
+      0%,45%   { opacity:1; }
+      50%,100%{ opacity:0; }
+    }
+
+    /* ─── 공통 섹션 ───────────────────────── */
+    section {
+      padding: 100px 0;
+    }
+
+    /* ─── 섹션2 ───────────────────────────────────────────── */
+    
+.section2 {
+  background: url('back.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #000;
+  text-align: left;
+  padding: 100px 7% 150px;
+}
+
+/* 인트로 문구 */
+.section2 > .wrap > p.intro {
+  font-family: 'Pretendard-SemiBold', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 120px;
+  margin-top: 0px;
+}
+
+/* 섹션 제목 */
+.section2 .section-title {
+  font-family: 'Pretendard-Bold', sans-serif;
+  font-size: 38px;
+  
+  margin-bottom: 20px;
+  padding-top: 0px;
+}
+
+
+.section2 .horizontal-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* 각 항목을 이미지 ← 텍스트 블록 형태로 가로 배치 */
+.section2 .flex-item {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+
+.section2 .flex-item img {
+  flex-shrink: 0;
+  width: 350px; /* 필요에 따라 120px ~ 180px 사이로 조절 */
+  height: auto;
+  border-radius: 10px;
+}
+
+/* 텍스트 블록 */
+.section2 .text-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+}
+
+/* 제목 */
+.section2 .text-block h2 {
+  font-family: 'Pretendard-SemiBold', sans-serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* 설명 */
+.section2 .text-block p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+    /* ─── 섹션3 ───────────────────────────────────────────── */
+    .section3 {
+      background: #000;
+      text-align: center;
+    }
+    .section3 .wrap > p.title {
+      font-family: 'Pretendard-Bold', sans-serif;
+      font-size: 48px;
+      margin-bottom: 50px;
+      font-weight: 680;
+    }
+    .section3 .video-container video {
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+    .section3 .section3-text {
+      max-width: 900px;
+      margin: 40px auto 0;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.5;
+      
+    }
+
+    /* ─── 섹션4 ───────────────────────────────────────────── */
+    .section4 {
+      background: linear-gradient(to bottom, #000 0%, #444 100%);
+      color: #fff;
+    }
+    .section4 .horizontal-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 80px;
+    }
+    .section4 .flex-item {
+      flex: 1 1 300px;
+      max-width: 360px;
+      text-align: left;
+    }
+    .section4 .flex-item img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .section4 .flex-item h2 {
+      font-family: 'Pretendard-SemiBold', sans-serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .section4 .flex-item p {
+    	margin-top: 18px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* ─── 섹션5 ───────────────────────────────────────────── */
+    .section5 {
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+    .section5 .section-title {
+      font-family: 'Pretendard-Regular', sans-serif;
+      font-size: 38px;
+      margin-bottom: 30px;
+      
+      text-align: center;
+    }
+     .section5 .title {
+      font-family: 'Pretendard-Bold', sans-serif;
+      font-size: 48px;
+      margin-bottom: 150px;
+      font-weight: 680;
+      text-align: center;
+    }
+    .section5 .video-container video {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+    .section5 .section3-text {
+      max-width: 900px;
+      margin: 0px auto 0;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.5;
+      
+    }
+
+    /* ─── 섹션6 (bg-pic2) ─────────────────────────────────── */
+    .bg-pic2 {
+      position: relative;
+    }
+    .bg-pic2 .bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
+    }
+    .bg-pic2 .wrap {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+      padding: 0px 20px;
+    }
+    .bg-pic2 .section-5 {
+      font-family: 'Pretendard-Bold', sans-serif;
+      font-size: 48px;
+      font-weight: 680;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    .bg-pic2 .surb5 {
+      font-family: 'Pretendard-Regular', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: left;
+      max-width: 800px;
+    }
+
+    /* ─── 섹션7 ───────────────────────────────────────────── */
+    .section7 {
+      background: #fff;
+      color: #000;
+      text-align: center;
+    }
+    .section7-title {
+      font-family: 'Pretendard-Bold', sans-serif;
+      font-size: 48px;
+      margin-bottom: 60px;
+      margin-top: 100px;
+    }
+    .section7-image img {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+    .section7-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 60px;
+      margin-top: 50px;
+    }
+    .section7-text {
+      flex: 1;
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: left;
+    }
+    .section7-text.left {
+      flex: 1.58;
+    }
+
+/* ─── 섹션9 ───────────────────────────────────────────── */
+    .section9 {
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+    .section9 .section-title {
+      font-family: 'Pretendard-Regular', sans-serif;
+      font-size: 38px;
+      margin-bottom: 30px;
+      
+      text-align: center;
+    }
+     .section9 .title {
+      font-family: 'Pretendard-Bold', sans-serif;
+      font-size: 48px;
+      margin-bottom: 150px;
+      font-weight: 680;
+      text-align: center;
+    }
+    .section9 .img-container  {
+      width: 100%;
+      max-width: 850px;
+      margin-top: 30px;
+      border-radius: 10px;
+    }
+    .section9 .img-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+    .section9 .section3-text {
+      max-width: 900px;
+      margin: 0px auto 0;
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.5;
+      
+    }
+
+    /* ─── 모션? ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      header .wrap {
+        flex-direction: column;
+        gap: 20px;
+        height: auto;
+        padding: 40px 20px;
+      }
+      .horizontal-flex,
+      .section7-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .img-container img,
+      .section7-image img {
+        max-width: 80%;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <ul>
+      <li><a href="#1">World Round Bead</a></li>
+      <li><a href="#2">Preview</a></li>
+      <li><a href="#3">See</a></li>
+      <li><a href="#4">Hear</a></li>
+      <li><a href="#5">Touch</a></li>
+      <li><a href="#6">Buy</a></li>
+    </ul>
+  </nav>
+
+  <!-- 첫화면 -->
+  <header>
+    <div class="wrap">
+      <h1 class="logo-text">World</h1>
+      <div class="img-container">
+        <img src="round.png" alt="round">
+        <img src="tree.png" class="blink img2" alt="tree">
+      </div>
+      <h1 class="logo-text">Bead</h1>
+    </div>
+  </header>
+
+  <!-- 섹션2 -->
+<section class="section2">
+  <div class="wrap">
+   
+     <p class="section-title">Preview</p>
+
+    <p class="intro">
+      ‘월드 라운드 비즈’는 세상을 둥글게 보여주고 들려주는 구슬 악세서리입니다.<br>
+      바쁘고 피곤한 현대인들이 둥글둥글하게 살아갈 수 있도록 돕습니다.
+    </p>
+
+   <div class="horizontal-flex">
+      <div class="flex-item">
+        <img src="see.png" alt="visual">
+        <div class="text-block">
+          <h2>Visual distortion</h2>
+          <p>구슬의 굴절률에 따른 시각 왜곡을 분석하여,<br>세상을 부드럽고 따뜻하게 왜곡하는 기술을 완성했습니다.</p>
+        </div>
+      </div>
+      <div class="flex-item">
+        <img src="sound.png" alt="sound">
+        <div class="text-block">
+          <h2>Sound distortion</h2>
+          <p>소리의 굴절과 주파수 변화를 분석해<br>세상의 소리를 둥글게 왜곡하는 기술을 만들었습니다.</p>
+        </div>
+      </div>
+      <div class="flex-item">
+        <img src="peace.png" alt="peace">
+        <div class="text-block">
+          <h2>Peace of mind</h2>
+          <p>세상의 자극을 부드럽게 흡수해,<br>사용자에게 평화로운 감각을 전달하는 감성 기술입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 섹션3 -->
+  <section class="section3">
+    <div class="wrap">
+      <p class="title">눈에 보이는 것을 둥글게 왜곡합니다.</p>
+      <div class="video-container">
+        <video src="distort.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <p class="section3-text">
+        피곤하고 예민한 날, 세상을 날서게 바라보진 않으셨나요?<br>
+        월드 라운드 비즈를 통해 보는 세상은 둥글고, 여유롭습니다.<br>
+        구슬은 짜증나게 느껴지던 모든 요소를 아름답게 왜곡해요. <br>
+        ‘월라비’와 함께 바쁘게 사느라 놓친 것들을 마주하며 행복을 느껴봐요!
+      </p>
+    </div>
+  </section>
+
+  <!-- 섹션4 -->
+  <section class="section4">
+    <div class="wrap horizontal-flex">
+      <div class="flex-item">
+      	<h2>지나쳐버린 일상 되돌아보기</h2>
+        <img src="think.png" alt="지나쳐버린 일상 되돌아보기">
+        <p>구슬은 순간들을 저장합니다.<br>다시 보고 싶은 순간으로 돌려보세요.</p>
+      </div>
+      <div class="flex-item">
+      	<h2>좋은 건 크게 보기</h2>
+        <img src="cl.png" alt="좋은 건 크게 보기">
+        
+        <p>더 크게 보고 싶은 장면이 있으신가요?<br>구슬을 확대하고 싶은 곳에 비춰보세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션5 -->
+  <section class="section5">
+    <div class="wrap">
+      <p class="section-title">How</p>
+      <p class="title">구슬의 굴절률을 이용합니다.</p>
+      <p class="section3-text">
+        구슬과 피사체 간의 거리에 따른 굴절률을 분석하여<br>
+        사용자가 편하게 조절 가능한 다이얼을 만들었습니다.
+      </p>
+      <div class="video-container">
+        <video src="t.mp4" autoplay loop muted playsinline></video>
+      </div>
+     
+    </div>
+  </section>
+
+  <!-- 섹션6 -->
+  <section class="bg-pic2">
+    <img src="db.png" alt="background image" class="bg-img">
+    <div class="wrap">
+      <p class="section-5">다이얼을 돌려 굴절률을 조절해요.</p>
+      <p class="surb5">
+        세상을 얼만큼 둥글게 왜곡하여 볼 지 선택할 수 있습니다.<br>
+        상황과 기분에 따라 왜곡 정도를 조절해보세요!
+      </p>
+    </div>
+  </section>
+
+  <!-- 섹션7 -->
+  <section class="section7">
+    <div class="wrap">
+      <h2 class="section7-title">귀에 들리는 것을 둥글게 왜곡합니다.</h2>
+      <div class="section7-image">
+        <img src="hm.png" alt="월드 라운드 비즈 체험">
+      </div>
+      <div class="section7-content">
+        <div class="section7-text left">
+          <p>작은 소리에도 큰 자극을 느끼고 예민함을 보인다!</p>
+          <p>평소라면 무디하게 넘겼을 소음이 유독 짜증난다!</p>
+          <p>작은 말에도 날선 반응을 보이게 된다!</p>
+          <p>상대방의 말의 의도가 왜곡되어 기분 나쁘게 받아들여진다!</p>
+        </div>
+        <div class="section7-text right">
+          <p>이럴 때 “월드 라운드 비즈”를 사용해 보세요.</p>
+          <p>구슬은 이런 소리도 둥글게 왜곡합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- 섹션9 -->
+<section class="section9">
+    <div class="wrap">
+      <p class="section-title">How</p>
+      <p class="title">음성 인식 장치를 이용합니다.</p>
+      <p class="section3-text">
+        구슬에 내장된 음성 인식 장치는 실시간으로 소리를 인식합니다.<br>
+        인식된 소리는 필터링을 통해 듣기 좋은 둥근 소리로 치환됩니다.<br>
+        듣기 싫은 소리들, 구슬에 대고 흡수시켜보세요!
+      </p>
+      <div class="img-container">
+        <img src="w.gif" >
+      </div>
+     </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <p>Copyright 2025 My Website</p>
+    </div>
+  </footer>
+</body>
+</html>
